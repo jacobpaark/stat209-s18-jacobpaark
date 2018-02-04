@@ -1,0 +1,43 @@
+---
+title: "MY first markdown file"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+## Reading the Data
+This dataset was a collection of favorite restaurants in the 10:30 am section of our Statistical Modeling class. The dataset includes name of the restaurant, price of average meal, last visit, cuisine, annual visit, and location.
+
+```{r}
+class_data <- read_csv("C:\\Users\\jp7nb\\Desktop\\fav_restaurants.csv")
+```
+
+## Plotting the Data
+
+```{r}
+ggplot(class_data, aes(cost_per_person)) + geom_bar()
+```
+
+This bar graph represents the average cost per person. This also shows the frequency of the cost.
+
+```{r}
+ggplot(class_data, aes(cost_per_person, yearly_visits)) + geom_line()
+```
+
+This line chart shows the yearly visits at the price point. This shows that as the food gets more expensive, the less frequent the yearly visits are. 
+
+```{r}
+ggplot(class_data, aes(yearly_visits)) + geom_bar()
+```
+
+This bar graph shows the frequency of visits at each restaurant. This shows that most students visit the restaurant around 0-10 times, with a large drop off over 10 visits. 
+
+
+
+
+
