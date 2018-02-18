@@ -1,0 +1,113 @@
+---
+title: "Trends in the Automobile Industry"
+author: "Jacob Park"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+```
+
+# Trends in the Automobile Industry
+
+## Overview
+
+This data analysis has to do with trends in the displacement, mpg, and horsepower based on other events that happen for that year. I first started by gathering a dataset of mid-sized sedans that are popular in the United States. This includes luxury cars and economy cars but all within the same class. For the engine size, everything is based on the base model for that generation. Each car starts from 1985 to current day. The vehicles in this dataset are the first vehicles in production for that generation. The main point of this research is to see the trend between the specifications of the cars and other events that might influence a manufacturer's decision. 
+
+## Data Dictionary
+
+Here is a data dictionary for the cars dataset:
+
+- **year**: a character variable that states the first year of each generation. 
+- **make**: a character variable that states the brand of the vehicle
+- **model**: a character variable that states the model of the vehicle. For cars with a general class of vehicle, the            common name will be used. For example: BMW 3 class will be just "3".
+- **displacement**: a numerical variable that states the vehicle engine's displacement. This figure is in liters.
+- **hp**: a numerical variable that states the vehicle's horsepower rating. This is the stated horsepower from the               manufacturer and not user-reported.
+- **mpg**: a numerical variable that states the average miles per gallon for each vehicle.
+- **turbo**: a categorical variable that states whether the car is turbo charged or naturally aspirated. "Yes" is turbo charged and "No" is naturally aspirated. The choices are:
+      - yes
+      - no
+- **gas_price**: a numerical variable that states the average gas price across the nation for the year. This figure is from a government website: "https://www.energy.gov"
+
+Which can be read in as follows:
+
+```{r}
+cars <- read_csv("https://raw.githubusercontent.com/urstats/stat209-s18-jacobpaark/master/data.csv")
+```
+
+## Exploratory Analysis
+
+The main trend that can be seen is as the years go by and the technology improves, horsepower has a steady increase. The size of the points on the graph increases with the displacement, which implies a positive correlation between engine size and horsepower. There is also a small trend towards manufacturers implementing turbocharged engines for certain manufacturers like Honda and Volkswagen for this generation in an effort to increase fuel economy.
+
+```{r, echo=FALSE}
+ggplot(cars, aes(year, hp)) +
+  geom_point(aes(size = displacement, color = make)) +
+  annotate("text", x = 2016, y = 147, label = "Turbocharged
+      Honda", size = 3) +
+  annotate("text", x = 2010, y = 119, label = "Turbocharged
+  Volkswagen", size = 3) +
+  xlab("Vehicle Year") +
+  ylab("Horsepower") +
+  ggtitle("Horsepower by Year")
+  
+```
+
+However, there does not seem to be a strong correlation between engine size and fuel economy. The main correlation is as the cars get newer and technology improves, fuel economy improves as a result. There are also other intitiatives and technology that manufacturers are implementing into their engines like Honda's VVT-i technology and Mazda's skyactiv technology to improve their fuel economy without moving to a turbocharged engine (Mazda). There are couple reason why manufacturers are reluctant to move to a turbocharged engine. The reasons are: it can be costly to repair, less reliable, less horsepower, require more expensive premium gas, and costly research and development (Explained). However, major companies like Honda and Volkswagen are already making the leap to futureproof their engines. 
+
+```{r, echo=FALSE}
+ggplot(cars, aes(year, displacement)) +
+  geom_point(aes(size = mpg, color = make)) +
+  xlab("Vehicle Year") +
+  ylab("Engine Size (in Liters)") +
+  ggtitle("Engine Size by Year")
+```
+
+However, the average mpg for each vehicle is not improving drastically. All the vehicles are hovering between 20-35 average mpg. This is suspected to change and manufacturers are pushing toward higher fuel economy because of the EPA's new standard to have an average of 50.5 mpg in their entire vehicle lineup by the year 2025 (Shepardson). This will show a switch from naturally aspirated engines to more turbocharged and hybrid vehicles in their lineup. It should be noted that Mazda has already achieved an average of 40 mpg on their vehicle even with a large displacement engine by using their skyactiv technology.
+
+```{r, echo=FALSE}
+ggplot(cars, aes(year, mpg)) +
+  geom_point() +
+  annotate("point", x = 2013, y = 40, color = "salmon", size = 3) +
+  annotate("text", x = 2013, y = 39, label = "Mazda") +
+  xlab("Year") +
+  ylab("Fuel Economy (in Miles Per Gallon)") +
+  ggtitle("Fuel Economy by Year")
+```
+
+Another interesting trend was the increase in fuel economy as gas prices increased. There is a clump of vehicles in between the 20-30 MPG range when the average gas prices are low. As the gas price increase, there are manufacturers that increase their fuel economy to over 30 MPG to entice buyers with their affordability. 
+
+```{r, echo=FALSE}
+ggplot(cars, aes(gas_price, mpg)) +
+  geom_point() +
+  annotate("rect", xmin = 1.4, xmax = 2.1, ymin = 18, ymax = 32, fill = "salmon", alpha = 0.5) +
+  annotate("text", x = 1.75, y = 33, label = "Low Gas Prices", color = "red") +
+  xlab("Average Annual Gas Prices") +
+  ylab("Average Fuel Economy (in Miles Per Gallon)") +
+  ggtitle("Fuel Economy by Average Gas Prices")
+```
+
+
+## Conclusion
+
+This research outlines many different interesting trends that occur in the automobile industry. There has been a strong increase in horsepower as the years go by to compete with their competitors. However, there was not a strong correlation between engine size and fuel economy because of the technology that is being implemented to increase fuel economy without moving to a lower displacement engine. Another interesting fact was the increase of fuel economy as the gas price rise. Since the government is mandating an average of 50.5 mpg for their vehicle lineups, manufacturers are pushing to get their vehicles to be more fuel efficient.
+
+## References
+
+Explained, Engineering. “Engineering Explained: The Pros And Cons Of Turbochargers Vs Superchargers.” Car Throttle, Car Throttle, 18 May 2015, www.carthrottle.com/post/engineering-explained-the-pros-and-cons-of-turbochargers-vs-superchargers/.
+
+“Find and Compare Cars.” Www.fueleconomy.gov - the Official Government Source for Fuel Economy Information, www.fueleconomy.gov/feg/findacar.shtml.
+
+MAZDA: SKYACTIV TECHNOLOGY | Technology, www.mazda.com/en/innovation/technology/skyactiv/.
+
+Shepardson, David. “EPA Locks in 2025 Fuel Efficiency Rules.” Reuters, Thomson Reuters, 13 Jan. 2017, www.reuters.com/article/us-usa-automakers/epa-locks-in-2025-fuel-efficiency-rules-idUSKBN14X1Q6.
+
+“Vehicle Technologies Office.” Department of Energy, energy.gov/eere/vehicles/vehicle-technologies-office.
+
+“VTEC vs VVT-i.” VTEC vs VVT-i - Difference and Comparison | Diffen, www.diffen.com/difference/VTEC_vs_VVT-i.
+
