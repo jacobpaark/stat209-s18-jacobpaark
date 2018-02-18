@@ -1,1 +1,77 @@
-﻿year	make	model	displacement	hp	mpg	turbo	gas_price1981	Honda	Accord	1.6	80	27	No	2.971982	BMW	3	1.8	90	18	No	2.61982	Mercedes	C	1.8	109	25.3	No	2.61988	Volkswagen	Passat	1.8	75	29.4	Yes	1.591989	Hyundai	Sonata	1.8	95	27.7	No	1.71989	Honda	Accord	1.8	105	26.4	No	1.71990	Toyota	Camry	2	128	24	No	1.891991	Toyota	Camry	2.2	136	26.7	No	1.811991	BMW	3	1.6	102	19	No	1.811993	Hyundai	Sonata	1.8	98	20	No	1.681993	Volkswagen	Passat	1.8	75	28.7	Yes	1.681993	Honda	Accord	2	131	25.6	No	1.681993	Mercedes	C	1.8	122	23	No	1.681994	Audi	A4	1.6	101	22	No	1.651996	Hyundai	Sonata	2	95	21	No	1.761996	Volkswagen	Passat	1.6	100	29.4	Yes	1.761996	Honda	Accord	1.8	116	25.8	No	1.761996	Chevrolet	Malibu	2.2	141	28	No	1.761997	Toyota	Camry	2.2	131	24.5	No	1.741997	Honda	Accord	2.3	135	26	No	1.741997	Mercedes	C	1.8	122	22	No	1.741998	Hyundai	Sonata	2	136	20	No	1.471998	BMW	3	1.9	105	20	No	1.472000	Volkswagen	Passat	1.6	102	30.5	Yes	2.022000	Mercedes	C	2	129	24.8	No	2.022001	Toyota	Camry	2.4	152	24.2	No	1.912001	Hyundai	Sonata	1.8	132	22	No	1.912001	Audi	A	1.6	102	23	No	1.912002	Nissan	Altima	2.5	175	23	No	1.752002	Honda	Accord	2.4	160	28	No	1.752002	Mazda	Mazda6	1.8	120	30.5	No	1.752002	BMW	3	1.8	115	20	No	1.752003	Chevrolet	Malibu	2.2	145	28	No	2.012004	toyota	camry	2.4	157	24	No	2.322004	Hyundai	Sonata	2	144	23	No	2.322004	Audi	A4	1.6	102	23	No	2.322004	Mercedes	C	1.8	143	19	No	2.322005	Ford	Fusion	2.3	160	24	No	2.742005	Volkswagen	Passat	1.6	102	30.5	Yes	2.742005	Honda	Accord	2.4	166	29	No	2.742005	Mazda	Mazda6	1.8	120	30.5	No	2.742005	BMW	3	2	129	21	No	2.742007	Toyota	Camry	2.4	158	26.4	No	3.162007	Nissan	Altima	2.5	175	26	No	3.162007	Mazda	Mazda6	1.8	120	34.6	No	3.162007	Audi	A4	1.8	120	22	No	3.162007	Mercedes	C	1.8	156	22	No	3.162008	Ford	Fusion	2.3	160	23	No	3.612008	Hyundai	Sonata	2	164	24	No	3.612008	Honda	Accord	2.4	177	24	No	3.612008	Chevrolet	Malibu	2.4	167	26	No	3.612008	BMW	3	2	136	21	No	3.612009	Hyundai	Sonata	2.4	198	25	No	2.582010	Volkswagen	Passat	1.4	122	37.3	Yes	3.022011	Toyota	Camry	2.5	178	28	No	3.752011	Mercedes	C	1.6	156	20	Yes	3.752012	Ford	Fusion	2.5	175	26	No	3.82012	Volkswagen	Passat	1.8	173	28	No	3.82012	Nissan	Altima	2.5	182	26	No	3.82012	Honda	Accord	2.4	185	27	No	3.82012	Chevrolet	Malibu	2.5	198	26	No	3.82012	BMW	3	1.6	136	27	No	3.82012	Audi	A4	1.8	120	25	No	3.82013	Mazda	Mazda6	2	145	40	No	3.622014	Toyota	Camry	2.5	178	28	No	3.42014	Hyundai	Sonata	2.4	185	28.3	No	3.42014	Mercedes	C	2	154	23	No	3.42015	Honda	Accord	2.4	185	27	No	2.452015	Mazda	Mazda6	2	165	39.2	No	2.452016	Ford	Fusion	2.5	175	25	No	2.452016	Chevrolet	Malibu	1.5	160	27	Yes	2.452016	BMW	3	1.5	136	26	No	2.452016	Audi	A4	1.4	150	24	Yes	2.452017	Toyota	Camry	2.5	203	34	No	2.452017	Hyundai	Sonata	2.4	185	29	No	2.452017	Honda	Accord	1.5	192	30	Yes	2.45
+year,make,model,displacement,hp,mpg,turbo,gas_price
+1990,Toyota,Camry,2,128,24,No,1.89
+1991,Toyota,Camry,2.2,136,26.7,No,1.81
+1997,Toyota,Camry,2.2,131,24.5,No,1.74
+2001,Toyota,Camry,2.4,152,24.2,No,1.91
+2004,toyota,Camry,2.4,157,24,No,2.32
+2007,Toyota,Camry,2.4,158,26.4,No,3.16
+2011,Toyota,Camry,2.5,178,28,No,3.75
+2014,Toyota,Camry,2.5,178,28,No,3.4
+2017,Toyota,Camry,2.5,203,34,No,2.45
+2005,Ford,Fusion,2.3,160,24,No,2.74
+2008,Ford,Fusion,2.3,160,23,No,3.61
+2012,Ford,Fusion,2.5,175,26,No,3.8
+2016,Ford,Fusion,2.5,175,25,No,2.45
+1989,Hyundai,Sonata,1.8,95,27.7,No,1.7
+1993,Hyundai,Sonata,1.8,98,20,No,1.68
+1996,Hyundai,Sonata,2,95,21,No,1.76
+1998,Hyundai,Sonata,2,136,20,No,1.47
+2001,Hyundai,Sonata,1.8,132,22,No,1.91
+2004,Hyundai,Sonata,2,144,23,No,2.32
+2008,Hyundai,Sonata,2,164,24,No,3.61
+2009,Hyundai,Sonata,2.4,198,25,No,2.58
+2014,Hyundai,Sonata,2.4,185,28.3,No,3.4
+2017,Hyundai,Sonata,2.4,185,29,No,2.45
+1988,Volkswagen,Passat,1.8,75,29.4,Yes,1.59
+1993,Volkswagen,Passat,1.8,75,28.7,Yes,1.68
+1996,Volkswagen,Passat,1.6,100,29.4,Yes,1.76
+2000,Volkswagen,Passat,1.6,102,30.5,Yes,2.02
+2005,Volkswagen,Passat,1.6,102,30.5,Yes,2.74
+2010,Volkswagen,Passat,1.4,122,37.3,Yes,3.02
+2012,Volkswagen,Passat,1.8,173,28,No,3.8
+2002,Nissan,Altima,2.5,175,23,No,1.75
+2007,Nissan,Altima,2.5,175,26,No,3.16
+2012,Nissan,Altima,2.5,182,26,No,3.8
+1981,Honda,Accord,1.6,80,27,No,2.97
+1989,Honda,Accord,1.8,105,26.4,No,1.7
+1993,Honda,Accord,2,131,25.6,No,1.68
+1996,Honda,Accord,1.8,116,25.8,No,1.76
+1997,Honda,Accord,2.3,135,26,No,1.74
+2002,Honda,Accord,2.4,160,28,No,1.75
+2005,Honda,Accord,2.4,166,29,No,2.74
+2008,Honda,Accord,2.4,177,24,No,3.61
+2012,Honda,Accord,2.4,185,27,No,3.8
+2015,Honda,Accord,2.4,185,27,No,2.45
+2017,Honda,Accord,1.5,192,30,Yes,2.45
+2002,Mazda,Mazda6,1.8,120,30.5,No,1.75
+2005,Mazda,Mazda6,1.8,120,30.5,No,2.74
+2007,Mazda,Mazda6,1.8,120,34.6,No,3.16
+2013,Mazda,Mazda6,2,145,40,No,3.62
+2015,Mazda,Mazda6,2,165,39.2,No,2.45
+1996,Chevrolet,Malibu,2.2,141,28,No,1.76
+2003,Chevrolet,Malibu,2.2,145,28,No,2.01
+2008,Chevrolet,Malibu,2.4,167,26,No,3.61
+2012,Chevrolet,Malibu,2.5,198,26,No,3.8
+2016,Chevrolet,Malibu,1.5,160,27,Yes,2.45
+1982,BMW,3,1.8,90,18,No,2.6
+1991,BMW,3,1.6,102,19,No,1.81
+1998,BMW,3,1.9,105,20,No,1.47
+2002,BMW,3,1.8,115,20,No,1.75
+2005,BMW,3,2,129,21,No,2.74
+2008,BMW,3,2,136,21,No,3.61
+2012,BMW,3,1.6,136,27,No,3.8
+2016,BMW,3,1.5,136,26,No,2.45
+1994,Audi,A4,1.6,101,22,No,1.65
+2001,Audi,A4,1.6,102,23,No,1.91
+2004,Audi,A4,1.6,102,23,No,2.32
+2007,Audi,A4,1.8,120,22,No,3.16
+2012,Audi,A4,1.8,120,25,No,3.8
+2016,Audi,A4,1.4,150,24,Yes,2.45
+1982,Mercedes,C,1.8,109,25.3,No,2.6
+1993,Mercedes,C,1.8,122,23,No,1.68
+1997,Mercedes,C,1.8,122,22,No,1.74
+2000,Mercedes,C,2,129,24.8,No,2.02
+2004,Mercedes,C,1.8,143,19,No,2.32
+2007,Mercedes,C,1.8,156,22,No,3.16
+2011,Mercedes,C,1.6,156,20,Yes,3.75
+2014,Mercedes,C,2,154,23,No,3.4
