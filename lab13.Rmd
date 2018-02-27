@@ -78,8 +78,8 @@ ggplot(births, aes(year, total)) +
 Now using `fct_inorder` to convert the ordering of the heads of state:
 
 ```{r}
-ggplot(births, aes(fct_inorder(head_of_state), total)) +
-  geom_line(aes(color = head_of_state))
+ggplot(births, aes(year, total)) +
+  geom_line(aes(color = fct_inorder(head_of_state)))
 ```
 
 Notice that this is a better way to present the data (and something we
