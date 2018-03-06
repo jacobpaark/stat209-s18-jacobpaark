@@ -1,0 +1,94 @@
+---
+title: "Using Census Data to Determine Relationship Between Income and Rent"
+author: "Jacob Park"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(ggmap)
+library(viridis)
+library(forcats)
+library(ggmap)
+```
+
+```{r}
+tracts <- read_csv("https://raw.githubusercontent.com/statsmaths/stat_data/gh-pages/acs_tract_data_2016.csv.gz")
+california <- filter(tracts, cbsa == "Los Angeles-Long Beach-Anaheim, CA")
+california$commute_long <- california$ctime_60_89 + california$ctime_90_99
+california$percentage_wealthiest <- california$race_asian + california$race_white
+temp <- select(california, starts_with("income_"))
+california$max_income_cat <- names(temp)[apply(temp, 1, which.max)]
+```
+
+## Overview
+
+This report is to figure out the relationship between income, rent, and race. Previously analyzed data reveals that ethnic minorities such as African Americans and Hispanics generally have lower income levels and live less frequently in owner-occupied housing (University). Therefore, it has been concluded that income disparity is highly correlated to housing disparity as the rental market has failed to help minorities in exiting from poverty. Racial and ethnic disparities persist in the United States even in the 21st century (Mather). While there is much data concerning the disparity in income and employment rates between African Americans, Hispanics, and Caucasians, there is much less data surrounding the differences between Caucasians and Asians or Asian Americans.  Statistically, Asians and Whites are the most affluent race, and this report will explicitly explore the relationship between the three using data from the Census (Perlberg). With Asians having the highest median income, followed by whites, hispanics, and African Americans respectively, it is necessary to further analyze data concerning the correlations between median income and rent among Asians and Caucasians. This report will focus on the greater Los Angeles area, because it contains the most heavily concentrated population of Asians and Whites. 
+
+## Analysis
+
+```{r}
+qmplot(lon, lat, data = california, geom = "blank")+
+  geom_point(aes(color = percentage_wealthiest)) +
+  scale_color_viridis() +
+  labs(color = "in percent") +
+  ggtitle("Percentage of White and Asian Population") +
+  annotate("text", x = -118.3221, y = 33.94, label = "East Compton") +
+  annotate("text", x = -118.1, y = 34.4979, label = "Palmdale") +
+  annotate("text", x = -117.9, y = 33.7, label = "Anaheim") +
+  annotate("text", x = -117.98, y = 34.1, label = "Citrus") +
+  annotate("text", x = -118.45, y = 34.3, label = "Sylmar")
+```
+
+The map above shows the population of the two wealthiest races in the greater Los Angeles area. The area already has a heavy population of Whites and Asians, but there are a few points in the map that are less concentrated. These areas are Palmdale, East Compton, Citrus, Anaheim, and Sylmar. Although the graph shows that the White and Asian population is prevalent in the area, there still are areas where it is noticeably less. These areas generally have more crime and are away from major corporations or work areas. Another interesting fact is the heavy concentration around the outskirts of the area. Since California is known for their beaches and its coastline, these areas are generally more desirable to live in. 
+
+```{r}
+qmplot(lon, lat, data = california, geom = "blank") +
+  geom_point(aes(color = median_rent)) +
+  scale_color_viridis() +
+  annotate("text", x = -118.22, y = 34.745, label = "Quartz Hill") +
+  annotate("text", x = -118.54, y = 34.49999, label = "Santa Clarita") +
+  annotate("text", x = -117.666, y = 33.7, label = "Foothill Ranch", size = 3) +
+  annotate("text", x = -118.396, y = 33.727, label = "Palos Verdes Estates") +
+  annotate("text", x = -118.679, y = 33.98, label = "Malibu Beach", size = 3) +
+  labs(color = "Median Rent in Dollars") +
+  ggtitle("Median Rent")
+```
+
+After looking at the scatterplots, there seems to be a correlation between rent prices and race. In the outskirts of the area, where most of the Asian and White population lives, there is a higher rent price than the central area. However, there are places like Quartz Hill where the rent prices are lower than the average of the rest. Santa Clarita also has a heavy population of Whites and Asians but also has a relatively low rent. This city is home to Six Flags Magic Mountain and draws in a large amount of tourists (City). However, since this place is a tourist attraction, there are not many employers in the area. The biggest employer being Six Flags and Princess Cruises. Foothill Ranch is also another example of a place with high population of Asian and Whites but a relatively low rent. However, places like Palos Verdes Estates is one of the most expensive areas to live in in the United States. This area is especially desirable because of its ocean views and education. The area also has gated estates and well known public schools which draws in high income individuals. This is an area that is heavily populated by the Asian and White population. Another similar area is the Malibu Beach area. This city is fantasized in pop culture and is an expensive area to live in. However, unlike Palos Verdes Estates, it has some variation in rent prices. Generally, since beach areas are also more expensive to live in, the rent prices increase as it gets closer to the shoreline.
+
+
+
+```{r}
+qmplot(lon, lat, data = california, geom = "blank") +
+  geom_point(aes(color = max_income_cat)) +
+  annotate("text", x = -118.396, y = 33.727, label = "Palos Verdes Estates") +
+  annotate("text", x = -118.679, y = 33.98, label = "Malibu Beach", size = 3) +
+  annotate("text", x = -118.22, y = 34.745, label = "Quartz Hill") +
+  ggtitle("Maximum Income Category") +
+  labs("Income Category")
+```
+
+According to the graph, there are correlations between the maximum income category and the population. With the highest income category colored in pink dots, they are mostly in the outer areas. In the Malibu area, there is a heavy concentration of high income areas. Another previously mentioned city, Palos Verdes Estates, also is heavily concentrated with the highest income category. However, the center of the area is more diverse in terms of the income category. Areas like East Compton have a lower income category than the average of the area. This is correlated with the lower population of the White and Asian population in the area. However, there are some discrepancies between the data. Quartz Hill has a dense population of Whites and Asians, but the income in the area is relatively low. This corresponds with the rent prices along the area. This area also has the lowest income category in the Los Angeles area. This is because it is in the middle of a dessert and is home to extreme climates. Despite the fact, there is still a high population of Asians and Whites in the area. 
+
+## Conclusion
+
+Although there is a general correlation between the density of White and Asian population to income and rent, there are still some outliers. Cities like Quartz Hill and Santa Clarita have a dense population of Whites and Asians but the cities have low income categories and low rent. As the city gets closer to the shoreline, the density of Whites and Asians increase along with the rent.
+
+
+## References
+
+City of Santa Clarita. City of Santa Clarita, California Comprehensive Annual Financial Report, June 30, 2016. Web.
+
+Mather, Mark. “Demographics in the United States, Trends and Developments.” Encyclopedia of Diversity in Education, doi:10.4135/9781452218533.n197.
+
+Perlberg, Steven. “American Median Incomes By Race Since 1967 [CHART].” Business Insider, Business Insider, 17 Sept. 2013, www.businessinsider.com/heres-median-income-in-the-us-by-race-2013-9.
+
+University, Stanford. “Report Finds Significant Racial and Ethnic Disparities.” Stanford News, 17 June 2017, news.stanford.edu/2017/06/16/report-finds-significant-racial-ethnic-disparities/.
