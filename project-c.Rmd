@@ -1,0 +1,113 @@
+---
+title: "Horsepower and Acceleration"
+author: "Jacob Park"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(out.width = "100%")
+knitr::opts_chunk$set(dpi = 300)
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(ggmap)
+library(viridis)
+library(forcats)
+library(smodels)
+```
+
+## Introduction
+For this project, I decided to see the relationship between the category of vehicles with the horsepower and acceleration. Since vehicles are comprised of many different engineering feats, this project explores the relationship between mostly the horsepower and acceleration. Since many people believe that with horsepower is positively correlated with acceleration, I wanted to see if there actually was a correlation between just horsepower and acceleration. I will also be exploring the two variables between the different brands as well. I believe that horsepower is not positively correlated with acceleration, performance category vehicles will have faster acceleration, and BMW will have the highest focus on horsepower since they are very driver-centric.
+
+## Methods
+I gathered my data using a variety of well-known automobile manufacturers from low budget to luxury brands. This will give a wide scope of data and will give interesting input on the difference between budget and luxury car brands. For the actual vehicles, I used every vehicle in the vehicle lineup as of today, April 7th, 2018. This will give a modern snapshot of what everything looks like today. I have a mixed variety of cars from Sedans and SUVs to even performance vehicles.
+
+## Data Dictionary:
+-**make**: a character variable describing the brand of the vehicle.
+
+-**model**: a character variable describing the specific model of the vehicle.
+
+-**category**: a categorical variable describing the vehicle class. Possible choices are:
+   
+   - SEDAN
+   
+   - SUV
+   
+   - HATCHBACK
+   
+   - PERFORMANCE
+   
+   
+-**horsepower**: a numerical variable containing the horsepower of the base model
+
+-**acceleration**: a numerical variable containing the 0-60 mph acceleration time. (in   
+                seconds)
+
+```{r}
+cars <- read_csv("https://raw.githubusercontent.com/urstats/stat209-s18-jacobpaark/master/data-c.csv")
+```
+
+## Results
+```{r, echo=FALSE}
+model <-lm_basic(acceleration ~ 1 + horsepower, data = cars)
+reg_table(model, level = 0.95)
+```
+
+```{r, echo=FALSE}
+qplot(horsepower, acceleration, data = cars) +
+  geom_smooth(method = "lm") +
+  ggtitle("Horsepower and Acceleration") +
+  xlab("Horsepower") +
+  ylab("Acceleration (in Seconds)")
+```
+
+This output shows the relationship between horsepower and acceleration. The line shown in the plot is the regression line. The confidence interval level used is 95% and will be 95% for all the graphs below.
+
+For this graph, mean acceleration is anywhere between 9.66544 seconds and 10.664 seconds. Since the confidence intervals for the horsepower does not contain 0, it is statistically significant.
+
+```{r, echo=FALSE}
+model <- lm_basic(acceleration ~ 1 + category, data = cars)
+reg_table(model, level = 0.95)
+```
+```{r, echo=FALSE}
+ggplot(cars, aes(category, acceleration)) +
+  geom_point() +
+  xlab("Vehicle Class") +
+  ggtitle("Vehicle Class and Acceleration")
+```
+
+This output shows the relationship between the category of vehicles and their acceleration.
+The intercept here is the category hatchback. This is the baseline because they are the slowest acceleration category. The mean of the hatchback could be anywhere between 7.501 and 9.859. Since the performance category has a slope of anywhere between -5.447  and -2.797, it is the fastest accelerating cateogry. 
+
+```{r, echo=FALSE}
+model <- lm_basic(horsepower ~ 1 + make, data = cars)
+reg_table(model, level = 0.95)
+```
+```{r, echo=FALSE}
+highhp <- filter(cars, make == c("AUDI", "BMW"))
+ggplot(highhp, aes(acceleration, horsepower)) +
+  geom_point() +
+  ggtitle("Horsepower and Acceleration for BMW and Audi") +
+  xlab("Acceleration (in Seconds)") +
+  ylab("Horsepower")
+```
+
+This analysis shows the relationship between the car manufacturers and the horsepower. The baseline used was Audi and it can have a mean horsepower of anywhere between 267.83 and 376.63. BMW can have a slope of anywhere between -56.55 and 92.09.
+
+## Conclusions
+According to the first analysis, as the horsepower increases, the acceleration time decreases. This decrease is significant, because the confidence intervals do not contain 0, but it is a very minor slope. However, as the horsepower increases by 1, it can be very roughly estimated that acceleration will decrease by 0.01333 seconds. My original hypothesis was incorrect and actually happened to be the other way around. 
+
+According to the second analysis, the vehicle class, performance, has the highest acceleration time between all the other ones. Hatchbacks were used as the baseline because of the slowest acceleration time and it can be roughly estimated that performance vehicles are roughly 4 seconds faster than hatchbacks. All vehicle classes other than hatchbacks will have a faster acceleration time which can be seen by the negative confidence intervals which all do not contain 0.
+
+According to the third analysis, BMW and Audi are among the highest horsepower brand of car manufacturers. The original hypothesis of BMW being the highest was not correct. Since Audi was the baseline and there was no statistical significance between the two brands, they are both the brands with the highest horsepower. The nonexisting statistical significance can be seen by the confidence interval containing 0. The other brands are far from being close to the baseline (Audi) which can be seen from their deviation from the baseline. 
+
+## References
+
+“Car Reviews - New Cars for 2016 and 2017 at Car and Driver.” Car and Driver,       www.caranddriver.com/.
+
+
+
