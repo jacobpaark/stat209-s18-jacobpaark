@@ -1,0 +1,78 @@
+---
+title: "Socioeconomic Status and Cancer"
+author: "Jacob Park"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(out.width = "100%")
+knitr::opts_chunk$set(dpi = 300)
+
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(ggmap)
+library(viridis)
+library(forcats)
+library(smodels)
+```
+
+Cancer is a disease that affects millions of people around the world. There are many different types of research that are done to show the correlation between certain types of foods or behaviors and cancer. With the increase in research of cancer around the world, there are new discoveries that are found everyday. There are socioeconomic factors that are correlated with the different types of cancer. Breast cancer and melanoma are positively correlated with income and race but lung cancer and colorectal cancer are negatively correlated with income. 
+
+```{r}
+cancer <- read_csv("https://statsmaths.github.io/stat_data/cancer_inc_data.csv")
+```
+
+```{r, echo=FALSE}
+model <- lm_basic(income ~ 1 + breast + colorectal + prostate + lung + melanoma, data = cancer)
+reg_table(model, level = 0.95)
+```
+
+```{r, echo=FALSE}
+ggplot(cancer, aes(income, melanoma)) +
+  geom_point(aes(color = region)) +
+  geom_smooth(method = "lm") +
+  ggtitle("Melanoma and Income") +
+  xlab("Median Household Income") +
+  ylab("Melanoma Incidence Rates")
+```
+
+There is a correlation between income and the different cancer types. In the case of breast cancer and melanoma, there is a positive correlation between income. This is the case because women with higher income "tend to drink alcohol, have fewer children, use birth control, and use menopausal hormone therapy"(Socioeconomic). These are all factors that increases the risk of breast cancer. An analysis from Komen found that alocoholic consumption increased "the relative risk of breast cancer... by about 7%"(Socioeconomic). This is because alcohol can alter the estrogen level in women. For melanoma, the risk increases with exposure to UV. Affluent individuals are "more likely to take more tropical vacations or go to tanning salons more often" (Boyles). The relationship between breast cancer and melanoma rates and high income is very significant because the confidence levels do not contain zero. For around every $200 increase in income, the cancer incident rate for both breast cancer and melanoma increases by 1 for every 100,000 households. 
+
+```{r, echo=FALSE}
+ggplot(cancer, aes(income, lung)) +
+  geom_point(aes(color = region)) +
+  geom_smooth(method = "lm") +
+  ggtitle("Lung Cancer and Income") +
+  xlab("Median Household Income") +
+  ylab("Lung Cancer Incidence")
+```
+
+```{r, echo=FALSE}
+model <- lm_basic(poverty ~ 1 + region, data = cancer)
+reg_table(model, level = 0.95)
+```
+
+For lung cancer, the opposite is true. As income decreases, the rate of lung cancer also decreases. Generally, individuals with lower income smoke more cigarettes. Cigarettes increase the risk of lung cancer significantly. Low income can also imply that there is less education and lack of healthcare. There is also a general trend in lung cancer rates based on the location. For East South Central locations, the lung cancer rates tend to be higher. This can be attributed to the high  level of poverty in that area. As poverty increases in the area, the lung cancer rates increase as well. For regions like New England, the region with the lowest poverty rate, has noticeably less lung cancer incident rates. 
+
+```{r, echo=FALSE}
+model <- lm_basic(breast ~ 1 + black_alone + white_alone + asian_alone, data = cancer)
+reg_table(model, level = 0.95)
+```
+
+In terms of race, lung cancer is highly prevelant in Asian individuals compared to other races. This can be due to the small amount or lack of children that Asian families are having. In China, a country with a population of 1.379 billion individuals, there is a rule that limits every household to only one child. Even though China dropped that law last year, there are still residual effects and people are still not having many children (Fischer). This does not help in reducing the cancer incident rates for those individuals. This is also due to the fact that Asian countries are adopting a more western lifestyle including partying, drinking, and eating (Breast). 
+
+
+## References
+Boyles, Salynn. “Melanoma Rates May Be Higher for the Rich.” WebMD, WebMD, 21 Mar. 2011,     www.webmd.com/melanoma-skin-cancer/news/20110321/melanoma-rates-may-be-higher-for-the-rich#2.
+
+“Breast Cancer in Asia | Gen Re.” Gen Re Perspective, www.genre.com/knowledge/publications/ri16-4-en.html.
+
+Fincher, Leta Hong. “China Dropped Its One-Child Policy. So Why Aren't Chinese Women Having More Babies?” The New York Times, The New York Times, 20 Feb. 2018, www.nytimes.com/2018/02/20/opinion/china-women-birthrate-rights.html.
+
+“Socioeconomic Status.” Susan G. Komen®, ww5.komen.org/Breastcancer/Highsocioeconomicstatus.html.
